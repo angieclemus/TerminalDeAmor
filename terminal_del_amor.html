@@ -40,6 +40,7 @@
 
 <div class="terminal" id="terminal">
     <div id="output">
+> Terminal del Amor v1.0
 > Bienvenida a la Terminal del Amor ❤
 > Presiona el botón para comenzar...
     </div>
@@ -83,18 +84,18 @@ Op ijqdv
 
     async function mostrarMensaje() {
         document.querySelector('button').remove();
-        await escribir('\n> Este mensaje de amor está cifrado usando el cifrado César con un desplazamiento de 21.');
-        await escribir('> Cada letra representa cuánto te amo, porque tú eres única. 💖');
-        await escribir('\n> ¿Qué deseas hacer?');
-        await escribir('1. Descifrarlo yo misma 🧠');
-        await escribir('2. Introducir la clave para ver el mensaje 💌');
+        await escribir('\n> Este mensaje de amor está cifrado usando el cifrado César con un desplazamiento de 21(porque ese día comenzamos a escribir nuestra historia)');
+        await escribir('> Este cifrado se usó porque el amor, como los datos, necesita ser transmitido con seguridad y cariño 💌');
+        await escribir('\n> ¿Qué quieres hacer?');
+        await escribir('1. Descifrarlo yo misma');
+        await escribir('2. Introducir la clave para ver el mensaje');
 
         await escribir('\n> Seleccionaste la opción 2. Mostrando mensaje descifrado...');
         await escribir('\n--- COMIENZO DEL MENSAJE ---\n');
         await escribir(mensajeCifrado, 10);
         await escribir('\n--- FIN DEL MENSAJE ---');
 
-        await escribir('\n\n> ¿Lista para el reto final?');
+        await escribir('\n\n> Ahora viene la ultima frase, esta es un reto');
         await escribir('> Aquí tienes una frase en binario ASCII. Cada bloque representa una letra:');
         await escribir(`\n${binarioFinal}`);
         await escribir(`\n\n> ¿Cómo descifrarlo?`);
