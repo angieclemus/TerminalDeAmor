@@ -80,10 +80,10 @@ Tu novia`;
 
     async function mostrarOpciones() {
         document.querySelector('button').remove();
-        await escribir("\n> Este mensaje está cifrado usando Cifrado César con desplazamiento 21.");
-        await escribir("> ¿Qué deseas hacer?");
-        await escribir("1. Descifrarlo yo misma 🧠");
-        await escribir("2. Ingresar la clave secreta para verlo automáticamente 💌");
+        await escribir("\n> Este mensaje está cifrado usando Cifrado César con desplazamiento 21(porque ese día comenzamos a escribir nuestra historia)");
+        await escribir("> ¿Qué quieres hacer?");
+        await escribir("1. Descifrarlo yo misma");
+        await escribir("2. Ingresar la clave secreta para ver el mensaje descifrado automáticamente");
 
         const inputDiv = document.createElement("div");
         inputDiv.className = "input-line";
@@ -96,15 +96,14 @@ Tu novia`;
     async function procesarOpcion() {
         const eleccion = document.getElementById("eleccion").value;
         if (eleccion === "1") {
-            await escribir("\n> ¡Te gusta el reto! 🧩");
-            await escribir("> Puedes usar esta herramienta para descifrarlo:");
-            await escribir("https://www.dcode.fr/caesar-cipher");
-            await escribir("> Desplazamiento -21 (o +5), ¡tú puedes!");
+            await escribir("\n> ¡yo te ayudo con el reto!");
+            await escribir("> El cifrado César funciona desplazando letras. Por ejemplo, si A → D con un desplazamiento de 3, entonces B → E, y así sucesivamente");
+            await escribir(">En este caso, el desplazamiento es 21, así que cada letra original fue reemplazada por la que está 21 posiciones después");
         } else if (eleccion === "2") {
             await escribir("\n> Introduce la clave secreta:");
             const inputClave = document.createElement("input");
             inputClave.type = "text";
-            inputClave.id = "claveSecreta";
+            inputClave.id = "chuchi";
             inputClave.placeholder = "clave...";
             document.getElementById("terminal").appendChild(inputClave);
 
@@ -150,9 +149,9 @@ Tu novia`;
         await escribir("   Bloque binario: 01001000");
         await escribir("   Posiciones: 128 64 32 16 8 4 2 1 = 0 1 0 0 1 0 0 0");
         await escribir("   Suma: 64 + 8 = 72 → Letra: H");
-        await escribir("💡 Puedes consultar una tabla ASCII aquí:");
-        await escribir("➡️ https://www.asciitable.com/");
-        await escribir("\n¡Feliz descifrado y feliz aniversario! 🎉");
+        await escribir("   Puedes consultar una tabla ASCII aquí:");
+        await escribir("   https://www.asciitable.com/");
+        await escribir("\nFeliz descifrado y feliz mes mi amor <3");
     }
 </script>
 
