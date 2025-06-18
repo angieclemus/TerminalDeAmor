@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Terminal del Amor</title>
+    <style>
+        body {
+            background-color: #1e1e1e;
+            color: #00ff9f;
+            font-family: monospace;
+            padding: 20px;
+        }
+        .terminal {
+            background-color: #111;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px #00ff9f;
+            white-space: pre-wrap;
+        }
+        input, button {
+            font-family: monospace;
+            background-color: #00ff9f;
+            color: #111;
+            border: none;
+            padding: 5px 10px;
+            margin-top: 10px;
+        }
+        .input-line {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="terminal" id="terminal">
+    <div id="output">
+> Bienvenida a la Terminal del Amor ❤
+> Presiona el botón para comenzar...
+    </div>
+    <div class="input-line">
+        <button onclick="mostrarOpciones()">Comenzar</button>
+    </div>
+</div>
+
+<script>
+    const mensajeDescifrado = `
+Mi amor
+
+Hoy celebramos ocho meses juntas, y no puedo dejar de sentirme agradecida por cada momento a tu lado, Te amo demasiado, y no solo por quién eres, sino por todo lo que eres capaz de lograr. Estoy muy orgullosa de ti, aunque a veces tú misma no lo veas.
+
+Sé que últimamente has tenido días difíciles, pero quiero recordarte que no estás sola, desde hoy y para siempre, somos un equipo, pase lo que pase, voy a estar contigo, estoy aquí para acompañarte, apoyarte y seguir construyendo juntas ese hogar con el que tanto soñamos.
+
+Quise regalarte algo especial para mí, realmente me esforcé, y use mis conocimientos para darte algo diferente. Esta carta está codificada, no solo para hacerlo divertido, cada letra, cada esfuerzo, está lleno de amor. Me esforcé para que fuera especial, porque tú lo eres
+
+Te elegiría una y mil veces 
+Te amo.
+Felices 8 meses ❤
+
+Con amor,
+Tu novia`;
+
+    const binarioFinal = "01001101 01101001 00100000 01110110 01100001 01110010 01101001 01100001 01100010 01101100 01100101 00100000 01100110 01100001 01110110 01101111 01110010 01101001 01110100 01100001 00100000 01100101 01110011 00100000 01101110 01101111 01110011 01101111 01110100 01110010 01101111 01110011 00101110";
+
+    function escribir(texto, delay = 30) {
+        return new Promise((resolve) => {
+            const output = document.getElementById('output');
+            let i = 0;
+            const interval = setInterval(() => {
+                output.innerHTML += texto[i];
+                i++;
+                if (i >= texto.length) {
+                    clearInterval(interval);
+                    output.innerHTML += '\n';
+                    resolve();
+                }
+            }, delay);
+        });
+    }
+
+    async function mostrarOpciones() {
+        document.querySelector('button').remove();
+        await escribir("\n> Este mensaje está cifrado usando Cifrado César con desplazamiento 21.");
+        await escribir("> ¿Qué deseas hacer?");
+        await escribir("1. Descifrarlo yo misma 🧠");
+        await escribir("2. Ingresar la clave secreta para verlo automáticamente 💌");
+
+        const inputDiv = document.createElement("div");
+        inputDiv.className = "input-line";
+        inputDiv.innerHTML = `
+> Escribe tu elección (1 o 2): <input id="eleccion" maxlength="1" size="1">
+<button onclick="procesarOpcion()">Enviar</button>`;
+        document.getElementById("terminal").appendChild(inputDiv);
+    }
+
+    async function procesarOpcion() {
+        const eleccion = document.getElementById("eleccion").value;
+        if (eleccion === "1") {
+            await escribir("\n> ¡Te gusta el reto! 🧩");
+            await escribir("> Puedes usar esta herramienta para descifrarlo:");
+            await escribir("https://www.dcode.fr/caesar-cipher");
+            await escribir("> Desplazamiento -21 (o +5), ¡tú puedes!");
+        } else if (eleccion === "2") {
+            await escribir("\n> Introduce la clave secreta:");
+            const inputClave = document.createElement("input");
+            inputClave.type = "text";
+            inputClave.id = "claveSecreta";
+            inputClave.placeholder = "clave...";
+            document.getElementById("terminal").appendChild(inputClave);
+
+            const botonClave = document.createElement("button");
+            botonClave.innerText = "Desbloquear";
+            botonClave.onclick = async () => {
+                await escribir("> ✔️ Clave correcta. Descifrando mensaje...");
+                await animarDescifrado();
+                await escribir("\n--- COMIENZO DEL MENSAJE ---\n");
+                await escribir(mensajeDescifrado, 10);
+                await escribir("\n--- FIN DEL MENSAJE ---");
+                mostrarRetoFinal();
+            };
+            document.getElementById("terminal").appendChild(botonClave);
+        } else {
+            await escribir("\n> Opción inválida.");
+        }
+    }
+
+    async function animarDescifrado() {
+        const barras = [
+            "█▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ 20%",
+            "███▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ 40%",
+            "█████▒▒▒▒▒▒▒▒▒▒▒▒▒▒ 60%",
+            "████████▒▒▒▒▒▒▒▒▒▒ 80%",
+            "███████████ 100% ✅"
+        ];
+        for (let barra of barras) {
+            await escribir(barra);
+            await new Promise(r => setTimeout(r, 500));
+        }
+    }
+
+    async function mostrarRetoFinal() {
+        await escribir("\n\n> ¿Lista para el reto final?");
+        await escribir("> Frase secreta en binario:");
+        await escribir(binarioFinal);
+        await escribir("\n\n> ¿Cómo descifrarlo a mano?");
+        await escribir("1. Cada grupo de 8 dígitos es una letra codificada en binario.");
+        await escribir("2. Convierte cada bloque a decimal.");
+        await escribir("3. Usa una tabla ASCII para saber qué letra corresponde.");
+        await escribir("4. Une todas las letras. Ejemplo:");
+        await escribir("   Bloque binario: 01001000");
+        await escribir("   Posiciones: 128 64 32 16 8 4 2 1 = 0 1 0 0 1 0 0 0");
+        await escribir("   Suma: 64 + 8 = 72 → Letra: H");
+        await escribir("💡 Puedes consultar una tabla ASCII aquí:");
+        await escribir("➡️ https://www.asciitable.com/");
+        await escribir("\n¡Feliz descifrado y feliz aniversario! 🎉");
+    }
+</script>
+
+</body>
+</html>
